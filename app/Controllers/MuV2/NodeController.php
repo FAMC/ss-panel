@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controllers\MuV2;
 
 use App\Controllers\BaseController;
@@ -13,6 +12,16 @@ use App\Utils\Tools;
 
 class NodeController extends BaseController
 {
+    public function users($request, $response, $args)
+    {
+        $users = User::all();
+        $res = [
+            'msg' => 'ok',
+            'data' => $users,
+        ];
+
+        return $this->echoJson($response, $res);
+    }
 
     public function onlineUserLog($request, $response, $args)
     {
@@ -24,15 +33,17 @@ class NodeController extends BaseController
         $log->log_time = time();
         if (!$log->save()) {
             $res = [
-                "ret" => 0,
-                "msg" => "update failed",
+                'ret' => 0,
+                'msg' => 'update failed',
             ];
+
             return $this->echoJson($response, $res);
         }
         $res = [
-            "ret" => 1,
-            "msg" => "ok",
+            'ret' => 1,
+            'msg' => 'ok',
         ];
+
         return $this->echoJson($response, $res);
     }
 
@@ -49,15 +60,17 @@ class NodeController extends BaseController
         $log->log_time = time();
         if (!$log->save()) {
             $res = [
-                "ret" => 0,
-                "msg" => "update failed",
+                'ret' => 0,
+                'msg' => 'update failed',
             ];
+
             return $this->echoJson($response, $res);
         }
         $res = [
-            "ret" => 1,
-            "msg" => "ok",
+            'ret' => 1,
+            'msg' => 'ok',
         ];
+
         return $this->echoJson($response, $res);
     }
 
@@ -90,9 +103,10 @@ class NodeController extends BaseController
         }
 
         $res = [
-            "ret" => 1,
-            "msg" => "ok",
+            'ret' => 1,
+            'msg' => 'ok',
         ];
+
         return $this->echoJson($response, $res);
     }
 }
