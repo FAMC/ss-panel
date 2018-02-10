@@ -60,6 +60,9 @@ $app->group('/api', function () {
     $this->put('/users/{id}/password', 'App\Controllers\Api\UserController:updatePassword')->add(new Api());
     $this->get('/users/{id}/inviteCodes', 'App\Controllers\Api\UserController:inviteCodes')->add(new Api());
     $this->post('/users/{id}/inviteCodes', 'App\Controllers\Api\UserController:genInviteCodes')->add(new Api());
+    // Pay
+    $this->post('/users/{id}/pay/paypal', 'App\Controllers\Api\UserPayController:paypal')->add(new Api());
+    $this->post('/users/{id}/pay/alipay', 'App\Controllers\Api\UserPayController:alipay')->add(new Api());
 
     // Config
     $this->get('/config', 'App\Controllers\Api\ConfigController:index');
@@ -79,6 +82,9 @@ $app->group('/api', function () {
     $this->put('/admin/config', 'App\Controllers\Api\Admin\ConfigController:update')->add(new Admin());
     $this->get('/admin/nodes', 'App\Controllers\Api\Admin\NodeController:index')->add(new Admin());
     $this->post('/admin/nodes', 'App\Controllers\Api\Admin\NodeController:store')->add(new Admin());
+    $this->get('/admin/users', 'App\Controllers\Api\Admin\UserController:index')->add(new Admin());
+    $this->get('/admin/users/{id}', 'App\Controllers\Api\Admin\UserController:show')->add(new Admin());
+    $this->put('/admin/users/{id}', 'App\Controllers\Api\Admin\UserController:update')->add(new Admin());
     $this->get('/admin/invites', 'App\Controllers\Api\Admin\InviteController:index')->add(new Admin());
     $this->post('/admin/invites', 'App\Controllers\Api\Admin\InviteController:store')->add(new Admin());
     $this->delete('/admin/invites/{id}', 'App\Controllers\Api\Admin\InviteController:delete')->add(new Admin());
@@ -96,6 +102,7 @@ $app->group('/api', function () {
         $this->post('/nodes/{id}/online_count', 'App\Controllers\MuV2\NodeController:onlineUserLog');
         $this->post('/nodes/{id}/info', 'App\Controllers\MuV2\NodeController:info');
         $this->get('/nodes/{id}/users', 'App\Controllers\MuV2\NodeController:users');
+        $this->get('/nodes/{id}/v2rayUsers', 'App\Controllers\MuV2\NodeController:v2rayUsers');
         $this->post('/nodes/{id}/traffic', 'App\Controllers\MuV2\NodeController:postTraffic');
     })->add(new Mu());
 
@@ -116,6 +123,7 @@ $app->group('/mu/v2', function () {
     $this->post('/nodes/{id}/online_count', 'App\Controllers\MuV2\NodeController:onlineUserLog');
     $this->post('/nodes/{id}/info', 'App\Controllers\MuV2\NodeController:info');
     $this->get('/nodes/{id}/users', 'App\Controllers\MuV2\NodeController:users');
+    $this->get('/nodes/{id}/v2rayUsers', 'App\Controllers\MuV2\NodeController:v2rayUsers');
     $this->post('/nodes/{id}/traffic', 'App\Controllers\MuV2\NodeController:postTraffic');
 })->add(new Mu());
 
